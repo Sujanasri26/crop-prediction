@@ -26,7 +26,9 @@ SECRET_KEY = "django-insecure-^&tl9d_1h=0(3)(vl3_tl*0qdz4)7ppqf^#^y5(*_rv^*1l3e_
 DEBUG = True
 
 # ALLOWED_HOSTS = ['chejarlasujanasri123.pythonanywhere.com']
-ALLOWED_HOSTS =[]
+# ALLOWED_HOSTS =[]
+ALLOWED_HOSTS = ['crop-prediction-udc5.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+        'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -127,6 +130,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
