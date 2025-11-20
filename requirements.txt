@@ -1,7 +1,7 @@
 pymupdf
 google-generativeai
 gunicorn
-django
+Django
 joblib
 scikit-learn
 joblib
