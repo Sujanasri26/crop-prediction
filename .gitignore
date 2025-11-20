@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+env/
+
+# Django static files (should NOT be committed)
+staticfiles/
+
+# Build files
+*.log
+
+# SQLite database
+db.sqlite3
+
+# IDE files
+.vscode/
+.idea/
