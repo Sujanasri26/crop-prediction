@@ -4,9 +4,10 @@
 <head>
     <title>Crop Recommendation</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
     body {
-        background-image: url("{% static 'pre1.png' %}");
+        background-image: url("{% static '6076e2e8-b410-410b-a1e6-837960e51357.webp' %}");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -16,51 +17,106 @@
         text-align: center;
         margin: 0;
         padding: 0;
+        top:0;
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
     }
-    
+
+    /* 🌫️ Frosted glass overlay */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 0;
+    }
+
     .container {
         position: relative;
         z-index: 1;
         max-width: 600px;
         margin: auto;
-        padding: 20px;
-        background: rgba(20, 20, 20, 0.8);
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-        backdrop-filter: blur(10px);
-        margin-top: 50px;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-top: 60px;
+        animation: fadeIn 1.5s ease-in-out;
     }
-    
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
     h1 {
-        font-size: 28px;
+        font-size: 30px;
         font-weight: bold;
         color: cyan;
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
         margin-bottom: 20px;
     }
-    
+
     table {
         width: 100%;
         border-collapse: collapse;
     }
-    
+
     td {
         padding: 10px;
         text-align: left;
+        vertical-align: middle;
     }
-    
+
+    label {
+        font-weight: bold;
+        color: #e0f7ff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    label span.icon {
+        font-size: 20px;
+    }
+
     input {
         width: 100%;
         padding: 10px;
         font-size: 16px;
         border: none;
-        border-radius: 5px;
-        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.2);
         color: white;
         outline: none;
         transition: 0.3s;
     }
-    
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    input:focus {
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 10px cyan;
+    }
+
+    .button-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
     button {
         padding: 12px 20px;
         font-size: 18px;
@@ -68,96 +124,130 @@
         color: white;
         background: linear-gradient(90deg, cyan, blue);
         border: none;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: pointer;
         transition: 0.3s;
         box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     }
-    
+
     button:hover {
         background: linear-gradient(90deg, blue, cyan);
         box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        transform: scale(1.05);
     }
-    
+
     #result {
-        font-size: 20px;
+        font-size: 22px;
         font-weight: bold;
-        color:white;
-        text-shadow: 0 0 10px white;
-        margin-top: 20px;
+        color: white;
+        text-shadow: 0 0 10px cyan;
+        margin-top: 25px;
     }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Recommendation</h1>
+        <h1>🌾 Crop Recommendation</h1>
         <form id="recommend-form">
             {% csrf_token %}
             <table>
                 <tr>
-                    <td><label for="nitrogen">Nitrogen:</label></td>
-                    <td><input type="text" id="nitrogen" name="nitrogen" placeholder="Enter Nitrogen level"></td>
+                    <td>
+                        <label for="nitrogen"> Nitrogen:<span class="icon">🧪</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="nitrogen" name="nitrogen" placeholder="Enter Nitrogen level">
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="phosphorus">Phosphorus:</label></td>
-                    <td><input type="text" id="phosphorus" name="phosphorus" placeholder="Enter Phosphorus level"></td>
+                    <td>
+                        <label for="phosphorus"> Phosphorus:<span class="icon">⚗️</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="phosphorus" name="phosphorus" placeholder="Enter Phosphorus level">
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="potassium">Potassium:</label></td>
-                    <td><input type="text" id="potassium" name="potassium" placeholder="Enter Potassium level"></td>
+                    <td>
+                        <label for="potassium">Potassium:<span class="icon">🧫</span> </label>
+                    </td>
+                    <td>
+                        <input type="text" id="potassium" name="potassium" placeholder="Enter Potassium level">
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="temperature">Temperature:</label></td>
-                    <td><input type="text" id="temperature" name="temperature" placeholder="Enter Temperature (°C)"></td>
+                    <td>
+                        <label for="temperature"> Temperature:<span class="icon">🌡️</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="temperature" name="temperature" placeholder="Enter Temperature (°C)">
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="humidity">Humidity:</label></td>
-                    <td><input type="text" id="humidity" name="humidity" placeholder="Enter Humidity (%)"></td>
+                    <td>
+                        <label for="humidity"> Humidity:<span class="icon">💧</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="humidity" name="humidity" placeholder="Enter Humidity (%)">
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="ph">pH:</label></td>
-                    <td><input type="text" id="ph" name="ph" placeholder="Enter pH level"></td>
+                    <td>
+                        <label for="ph"> pH:<span class="icon">🧴</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="ph" name="ph" placeholder="Enter pH level">
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="rainfall">Rainfall:</label></td>
-                    <td><input type="text" id="rainfall" name="rainfall" placeholder="Enter Rainfall (mm)"></td>
+                    <td>
+                        <label for="rainfall">Rainfall:<span class="icon">🌧️</span> </label>
+                    </td>
+                    <td>
+                        <input type="text" id="rainfall" name="rainfall" placeholder="Enter Rainfall (mm)">
+                    </td>
                 </tr>
             </table>
+
             <div class="button-container">
                 <button type="submit">Submit</button>
                 <button type="reset">Reset</button>
             </div>
         </form>
+
         <h2 id="result"></h2>
-        <script>
-            $(document).ready(function() {
-                $("#recommend-form").on("submit", function(e) {
-                    e.preventDefault();
-                    const formData = {
-                        nitrogen: $("#nitrogen").val(),
-                        phosphorus: $("#phosphorus").val(),
-                        potassium: $("#potassium").val(),
-                        temperature: $("#temperature").val(),
-                        humidity: $("#humidity").val(),
-                        ph: $("#ph").val(),
-                        rainfall: $("#rainfall").val(),
-                        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
-                    };
-    
-                    $.ajax({
-                        type: "POST",
-                        url: "{% url 'recommend' %}",
-                        data: formData,
-                        success: function(response) {
-                            $("#result").text("Recommended Crop: " + response.result);
-                        },
-                        error: function(xhr) {
-                            $("#result").text("Error: " + xhr.responseText);
-                        },
-                    });
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#recommend-form").on("submit", function(e) {
+                e.preventDefault();
+                const formData = {
+                    nitrogen: $("#nitrogen").val(),
+                    phosphorus: $("#phosphorus").val(),
+                    potassium: $("#potassium").val(),
+                    temperature: $("#temperature").val(),
+                    humidity: $("#humidity").val(),
+                    ph: $("#ph").val(),
+                    rainfall: $("#rainfall").val(),
+                    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'recommend' %}",
+                    data: formData,
+                    success: function(response) {
+                        $("#result").text("Recommended Crop: " + response.result);
+                    },
+                    error: function(xhr) {
+                        $("#result").text("Error: " + xhr.responseText);
+                    },
                 });
             });
-        </script>
-    </div>
+        });
+    </script>
 </body>
 </html>
+
