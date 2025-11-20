@@ -3,3 +3,8 @@ google-generativeai
 gunicorn
 django
 joblib
+scikit-learn
+joblib
+numpy
+pandas
+
